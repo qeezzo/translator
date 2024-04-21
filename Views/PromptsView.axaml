@@ -1,0 +1,110 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
+        xmlns:vm="using:translator.ViewModels"
+        xmlns:models="using:translator.Models"
+        x:CompileBindings="True"
+        x:Class="translator.Views.PromptsView"
+        x:DataType="vm:PromptsViewModel">
+
+  <UserControl.Resources>
+    <vm:KeyValuePairConverter x:Key="KeyValuePairConverter" />
+    <!-- <vm:OptionsCountConverter x:Key="OptionsCountConverter" /> -->
+  </UserControl.Resources>
+
+  <Grid ColumnDefinitions="*,40,*">
+    <TextBox  Grid.Row="0" Grid.Column="0"
+              Watermark="{DynamicResource Prompt.Source}"
+              AcceptsReturn="True"
+              Name="PromptLeft"
+              Classes="input"
+              FontStyle="Italic"
+              Text="{Binding Left}" />
+    <Button Grid.Row="0" Grid.Column="1"
+            Margin="3"
+            HotKey="Ctrl+Enter"
+            VerticalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            FontWeight="Bold"
+            CornerRadius="5"
+            FontSize="24"
+            Command="{Binding MainWindowViewModel.Translate}"
+            Content=">"/>
+
+    <Border Classes="input" Grid.Row="0" Grid.Column="2" >
+      <ScrollViewer>
+        <StackPanel>
+          <SelectableTextBlock Foreground="#888" FontStyle="Italic" Text="{DynamicResource Prompt.Translation}"
+            IsVisible="{Binding Right.translation, Converter={x:Static StringConverters.IsNullOrEmpty}}" />
+
+          <SelectableTextBlock Name="translation" Text="{Binding Right.translation}"/>
+
+            <!-- <SelectableTextBlock Foreground="#888" FontStyle="Italic" Text="{Binding Left}" -->
+            <!--   IsVisible="{Binding Right, Converter={x:Static vm:Converters.Right}}" /> -->
+          <SelectableTextBlock/>
+          <SelectableTextBlock Foreground="#888" FontStyle="Italic" Text="{DynamicResource Prompt.Options}"
+            IsVisible="{Binding Right.options.Count}" />
+
+
+          <StackPanel>
+            <ItemsControl ItemsSource="{Binding Right.options}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Vertical">
+                    <SelectableTextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource KeyValuePairConverter}, ConverterParameter=Key}" />
+                    <ItemsControl ItemsSource="{Binding Converter={StaticResource KeyValuePairConverter}, ConverterParameter=Value}">
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Option">
+                          <SelectableTextBlock>
+                            <!-- <Run Text="{Binding gender}" /> -->
+                            <Run Text="{Binding word}" />
+                            <Run Text=" - " />
+                            <Italic>
+                              <Run Foreground="#888" Text="{Binding translations, Converter={x:Static vm:Converters.ListConverter}}" />
+                            </Italic>
+                          </SelectableTextBlock>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+
+          <SelectableTextBlock/>
+          <SelectableTextBlock Foreground="#888" FontStyle="Italic" Text="{DynamicResource Prompt.Examples}"
+            IsVisible="{Binding Right.examples.Count}}" />
+
+          <StackPanel>
+            <ItemsControl ItemsSource="{Binding Right.examples}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Vertical">
+                    <SelectableTextBlock FontWeight="Bold" Text="{Binding Converter={StaticResource KeyValuePairConverter}, ConverterParameter=Key}" />
+                    <ItemsControl ItemsSource="{Binding Converter={StaticResource KeyValuePairConverter}, ConverterParameter=Value}">
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Example">
+                          <SelectableTextBlock>
+                            <Run Text="{Binding description}" />
+                            <LineBreak/>
+                            <Italic><Run Foreground="#888" Text="{Binding example}" /></Italic>
+                          </SelectableTextBlock>
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+  </Grid>
+
+</UserControl>

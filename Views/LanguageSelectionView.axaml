@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:translator.ViewModels"
+        x:CompileBindings="True"
+        x:Class="translator.Views.LanguageSelectionView"
+        x:DataType="vm:LanguageSelectionViewModel">
+
+  <UserControl.DataContext>
+    <vm:LanguageSelectionViewModel/>
+  </UserControl.DataContext>
+
+  <UserControl.Styles>
+    <Style Selector="ListBoxItem">
+      <Setter Property="FontSize" Value="18" />
+
+      <Style Selector="^:pointerover /template/ ContentPresenter">
+        <!-- <Setter Property="Background" Value="#222" /> -->
+      </Style>
+
+      <Style Selector="^:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#222" />
+        <Setter Property="Foreground" Value="#f66"/>
+      </Style>
+    </Style>
+  </UserControl.Styles>
+
+  <DockPanel>
+    <TextBox DockPanel.Dock="Top"
+             Classes="input"
+             Text="{Binding Input}"
+             Name="Input"
+             Margin="0,0,0,10"/>
+    <ListBox CornerRadius="10"
+             AutoScrollToSelectedItem="False"
+             ItemsSource="{Binding Languages}"
+             SelectedItems="{Binding SelectedItems}"
+             SelectionMode="Multiple,Toggle"
+             Name="Languages">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <UniformGrid Columns="4" />
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
+
+</UserControl>

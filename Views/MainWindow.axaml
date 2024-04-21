@@ -1,0 +1,86 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:translator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
+        Width="1000" Height="500"
+        xmlns:views="using:translator.Views"
+        x:CompileBindings="True"
+        x:Class="translator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="float">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <Window.Styles>
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="Noto Sans" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <Style Selector="SelectableTextBlock">
+        <Setter Property="FontFamily" Value="Noto Sans" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style Selector="Border.input">
+      <Setter Property="Padding" Value="10, 8" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="#222" />
+      <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="SelectableTextBlock.input">
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="TextBox.input">
+      <!-- <Setter Property="Padding" Value="10, 8" /> -->
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="FontSize" Value="16" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="#222" />
+      <Setter Property="BorderThickness" Value="0"/>
+
+      <Style Selector="^ /template/ TextBlock#PART_Watermark">
+        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="FontSize" Value="16" />
+      </Style>
+      <Style Selector="^:pointerover /template/ TextBlock#PART_Watermark">
+        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="FontSize" Value="16" />
+      </Style>
+      <Style Selector="^:focus /template/ TextBlock#PART_Watermark">
+        <Setter Property="Foreground" Value="LightGray"/>
+        <Setter Property="FontSize" Value="16" />
+      </Style>
+
+      <Style Selector="^:pointerover /template/ Border">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Background" Value="#222" />
+        <Setter Property="BorderThickness" Value="0"/>
+      </Style>
+
+      <Style Selector="^:focus /template/ Border">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Background" Value="#222" />
+        <Setter Property="BorderThickness" Value="0"/>
+      </Style>
+    </Style>
+  </Window.Styles>
+
+  <Border Padding="20">
+    <DockPanel>
+      <views:LanguagesView Name="Languages" DockPanel.Dock="Top" DataContext="{Binding Languages}"/>
+      <!-- <views:PromptsView Margin="0" DataContext="{Binding Prompts}"/> -->
+      <UniformGrid HorizontalAlignment="Right" Width="150" Columns="2" DockPanel.Dock="Bottom">
+        <Button Content="English" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="en-US"/>
+        <Button Content="Russian" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="ru-RU"/>
+      </UniformGrid>
+      <ContentControl Content="{Binding ContentViewModel}"/>
+    </DockPanel>
+  </Border>
+
+</Window>

@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:translator.ViewModels"
+        x:CompileBindings="True"
+        x:Class="translator.Views.LanguagesView"
+        x:DataType="vm:LanguagesViewModel">
+
+  <UserControl.DataContext>
+    <vm:LanguagesViewModel/>
+  </UserControl.DataContext>
+
+  <UserControl.Styles>
+    <Style Selector="ListBoxItem">
+      <Setter Property="FontSize" Value="18" />
+      <Setter Property="FontWeight" Value="Bold"/>
+      <!-- <Setter Property="Cursor" Value="Hand"/> -->
+
+      <Style Selector="^:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#222" />
+      </Style>
+
+      <Style Selector="^:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#000" />
+        <Setter Property="BorderBrush" Value="#f66"/>
+        <Setter Property="Foreground" Value="#f66"/>
+        <Setter Property="BorderThickness" Value="0,0,0,4"/>
+      </Style>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid ColumnDefinitions="40, 1*, 40, 1*, 40">
+
+    <Button Command="{Binding ToggleLanguageSelection}"
+            CommandParameter="{Binding LeftList, Mode=OneWay}"
+            Padding="5" Background="Transparent" Grid.Column="0">
+      <Svg Css="* { fill: #000; stroke: #f66; stroke-width: 2; }" Path="Assets/edit-pencil.svg"/>
+    </Button>
+
+    <ListBox ItemsSource="{Binding LeftList, Mode=OneWay}" SelectedItem="{Binding LeftSelected}"
+             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+             SelectionMode="Single,Toggle,AlwaysSelected"
+             Background="Transparent"
+             Name="ListBoxLeft"
+             Grid.Column="1" DockPanel.Dock="Left">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <ListBox ItemsSource="{Binding RightList}" SelectedItem="{Binding RightSelected}"
+             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+             SelectionMode="Single,Toggle,AlwaysSelected"
+             Background="Transparent"
+             Name="ListBoxRight"
+             Grid.Column="3" DockPanel.Dock="Right">
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border>
+            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <Button Command="{Binding ToggleLanguageSelection}"
+            CommandParameter="{Binding RightList}"
+            Padding="5" Background="Transparent" Grid.Column="4">
+      <Svg Css="* { fill: #000; stroke: #f66; stroke-width: 2; }" Path="Assets/edit-pencil.svg"/>
+    </Button>
+  </Grid>
+
+</UserControl>

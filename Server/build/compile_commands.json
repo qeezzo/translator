@@ -1,0 +1,68 @@
+[
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/server_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/server.dir/server_autogen/mocs_compilation.cpp.o -c /home/renat/university/oop/kursach/translator/Server/build/server_autogen/mocs_compilation.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/build/server_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/server.dir/server_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/server_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/server.dir/main.cpp.o -c /home/renat/university/oop/kursach/translator/Server/main.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/main.cpp",
+  "output": "CMakeFiles/server.dir/main.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/server_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/server.dir/Server.cpp.o -c /home/renat/university/oop/kursach/translator/Server/Server.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/Server.cpp",
+  "output": "CMakeFiles/server.dir/Server.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/server_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/server.dir/Translator.cpp.o -c /home/renat/university/oop/kursach/translator/Server/Translator.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/Translator.cpp",
+  "output": "CMakeFiles/server.dir/Translator.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/server_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/server.dir/ServerConnection.cpp.o -c /home/renat/university/oop/kursach/translator/Server/ServerConnection.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/ServerConnection.cpp",
+  "output": "CMakeFiles/server.dir/ServerConnection.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/server_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/server.dir/Query.cpp.o -c /home/renat/university/oop/kursach/translator/Server/Query.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/Query.cpp",
+  "output": "CMakeFiles/server.dir/Query.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtGui -std=c++17 -fPIC -o CMakeFiles/QOnlineTranslator.dir/QOnlineTranslator_autogen/mocs_compilation.cpp.o -c /home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/mocs_compilation.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/mocs_compilation.cpp",
+  "output": "QOnlineTranslator/CMakeFiles/QOnlineTranslator.dir/QOnlineTranslator_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtGui -std=c++17 -fPIC -o CMakeFiles/QOnlineTranslator.dir/src/qonlinetranslator.cpp.o -c /home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qonlinetranslator.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qonlinetranslator.cpp",
+  "output": "QOnlineTranslator/CMakeFiles/QOnlineTranslator.dir/src/qonlinetranslator.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtGui -std=c++17 -fPIC -o CMakeFiles/QOnlineTranslator.dir/src/qonlinetts.cpp.o -c /home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qonlinetts.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qonlinetts.cpp",
+  "output": "QOnlineTranslator/CMakeFiles/QOnlineTranslator.dir/src/qonlinetts.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtGui -std=c++17 -fPIC -o CMakeFiles/QOnlineTranslator.dir/src/qexample.cpp.o -c /home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qexample.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qexample.cpp",
+  "output": "QOnlineTranslator/CMakeFiles/QOnlineTranslator.dir/src/qexample.cpp.o"
+},
+{
+  "directory": "/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -I/home/renat/university/oop/kursach/translator/Server/build/QOnlineTranslator/QOnlineTranslator_autogen/include -I/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src -isystem /usr/include/qt -isystem /usr/include/qt/QtNetwork -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtMultimedia -isystem /usr/include/qt/QtGui -std=c++17 -fPIC -o CMakeFiles/QOnlineTranslator.dir/src/qoption.cpp.o -c /home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qoption.cpp",
+  "file": "/home/renat/university/oop/kursach/translator/Server/QOnlineTranslator/src/qoption.cpp",
+  "output": "QOnlineTranslator/CMakeFiles/QOnlineTranslator.dir/src/qoption.cpp.o"
+}
+]
