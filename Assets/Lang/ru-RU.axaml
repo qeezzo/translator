@@ -10,7 +10,7 @@
   <v:String x:Key="Russian">Русский</v:String>
   <v:String x:Key="English">Английский</v:String>
 
-  <v:String x:Key="frikaans">Африкаанс</v:String>
+  <v:String x:Key="Afrikaans">Африкаанс</v:String>
   <v:String x:Key="Albanian">Албанский</v:String>
   <v:String x:Key="Amharic">Амхарский</v:String>
   <v:String x:Key="Arabic">Арабский</v:String>

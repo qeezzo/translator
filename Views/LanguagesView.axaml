@@ -23,8 +23,8 @@
 
       <Style Selector="^:selected /template/ ContentPresenter">
         <Setter Property="Background" Value="#000" />
-        <Setter Property="BorderBrush" Value="#f66"/>
-        <Setter Property="Foreground" Value="#f66"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Theme.MainColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Theme.MainColor}"/>
         <Setter Property="BorderThickness" Value="0,0,0,4"/>
       </Style>
     </Style>

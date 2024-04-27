@@ -1,2 +1,0 @@
-/usr/bin/ar qc libQOnlineTranslator.a CMakeFiles/QOnlineTranslator.dir/QOnlineTranslator_autogen/mocs_compilation.cpp.o CMakeFiles/QOnlineTranslator.dir/src/qonlinetranslator.cpp.o CMakeFiles/QOnlineTranslator.dir/src/qonlinetts.cpp.o CMakeFiles/QOnlineTranslator.dir/src/qexample.cpp.o CMakeFiles/QOnlineTranslator.dir/src/qoption.cpp.o
-/usr/bin/ranlib libQOnlineTranslator.a

@@ -35,6 +35,20 @@ public class MainWindowViewModel : ViewModelBase {
     _ContentViewModel = Prompts;
   }
 
+  public void ChangeTheme(string theme) {
+    var themes = App.Current?.Resources
+      .MergedDictionaries.OfType<ResourceInclude>()
+      .FirstOrDefault(x => x.Source?.OriginalString?.Contains("/Theme/") ?? false);
+
+    if (themes != null)
+      App.Current!.Resources.MergedDictionaries.Remove(themes);
+
+    var newDictionary = new ResourceInclude(new Uri($"avares://translator/Assets/Theme/{theme}.axaml")) {
+        Source = new Uri($"avares://translator/Assets/Theme/{theme}.axaml")
+    };
+    App.Current?.Resources.MergedDictionaries.Add(newDictionary);
+  }
+
   public void Locale(string locale) {
     _Locale(locale);
     Languages.UpdateLists();

@@ -78,6 +78,9 @@
       <UniformGrid HorizontalAlignment="Right" Width="150" Columns="2" DockPanel.Dock="Bottom">
         <Button Content="English" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="en-US"/>
         <Button Content="Russian" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="ru-RU"/>
+
+        <Button Content="yellow" HorizontalAlignment="Center" Command="{Binding ChangeTheme}" CommandParameter="yellow"/>
+        <Button Content="red" HorizontalAlignment="Center" Command="{Binding ChangeTheme}" CommandParameter="red"/>
       </UniformGrid>
       <ContentControl Content="{Binding ContentViewModel}"/>
     </DockPanel>

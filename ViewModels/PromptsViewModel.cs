@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Avalonia.Data.Converters;
+using Avalonia.Interactivity;
 using translator.Models;
 
 namespace translator.ViewModels;
@@ -24,6 +25,19 @@ public class PromptsViewModel : ViewModelBase {
       _Right = value;
       RaisePropertyChanged();
     }
+  }
+
+  private int _Angle = 0;
+  public int Angle {
+    get => _Angle;
+    set {
+      _Angle = value;
+      RaisePropertyChanged();
+    }
+  }
+
+  public void Rotate(object obj, RoutedEventArgs args) {
+    Angle += 1;
   }
 
   public PromptsViewModel(MainWindowViewModel m) {
