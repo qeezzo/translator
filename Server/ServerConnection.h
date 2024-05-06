@@ -1,7 +1,6 @@
 #pragma once
 #include <boost/asio.hpp>
 #include <boost/system/detail/error_code.hpp>
-#include <iostream>
 
 using namespace boost::asio;
 using namespace boost;
@@ -12,17 +11,17 @@ class ServerConnection {
   ServerConnection(const unsigned short port = 30000);
 
   auto is_open() -> bool;
+  auto close() -> void;
 
   // synchronous
   auto accept() -> bool;
   auto read(std::vector<std::byte>& buf, system::error_code& err) -> size_t;
-
-  template <typename T>
-  auto write(T msg, boost::system::error_code& err) -> void {
-    std::clog << "Writing ... ";
-    int bytes = socket.write_some(buffer(msg), err);
-    std::clog << bytes << " written\n";
-  }
+  auto write(
+      const std::vector<boost::asio::const_buffer>& msg,
+      boost::system::error_code& err
+  ) -> void;
+  auto write(boost::asio::const_buffer msg, boost::system::error_code& err)
+      -> void;
 
  private:
   io_service service;

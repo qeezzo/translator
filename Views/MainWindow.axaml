@@ -17,6 +17,14 @@
   </Design.DataContext>
 
   <Window.Styles>
+    <Style Selector="TextBox.settings">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style Selector="TextBlock.settings">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0 20 0 5" />
+    </Style>
     <Style Selector="TextBlock">
         <Setter Property="FontFamily" Value="Noto Sans" />
         <Setter Property="FontSize" Value="16" />
@@ -75,13 +83,26 @@
     <DockPanel>
       <views:LanguagesView Name="Languages" DockPanel.Dock="Top" DataContext="{Binding Languages}"/>
       <!-- <views:PromptsView Margin="0" DataContext="{Binding Prompts}"/> -->
-      <UniformGrid HorizontalAlignment="Right" Width="150" Columns="2" DockPanel.Dock="Bottom">
-        <Button Content="English" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="en-US"/>
-        <Button Content="Russian" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="ru-RU"/>
+      <!-- <UniformGrid HorizontalAlignment="Right" Width="150" Columns="8" DockPanel.Dock="Bottom"> -->
+      <!--   <Button Content="English" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="en-US"/> -->
+      <!--   <Button Content="Russian" HorizontalAlignment="Center" Command="{Binding Locale}" CommandParameter="ru-RU"/> -->
 
-        <Button Content="yellow" HorizontalAlignment="Center" Command="{Binding ChangeTheme}" CommandParameter="yellow"/>
-        <Button Content="red" HorizontalAlignment="Center" Command="{Binding ChangeTheme}" CommandParameter="red"/>
-      </UniformGrid>
+      <!--   <Button Content="yellow" HorizontalAlignment="Center" Command="{Binding ChangeTheme}" CommandParameter="yellow"/> -->
+      <!--   <Button Content="red" HorizontalAlignment="Center" Command="{Binding ChangeTheme}" CommandParameter="red"/> -->
+      <!-- </UniformGrid> -->
+      <StackPanel Height="40"
+                  DockPanel.Dock="Bottom"
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right">
+        <Button Command="{Binding ToggleHistory}"
+                Width="40">
+          <Svg Css="* { fill: #f66; }" Path="Assets/history.svg"/>
+        </Button>
+        <Button Command="{Binding ToggleSettings}"
+                Width="40">
+          <Svg Css="* { fill: #f66; }" Path="Assets/settings.svg"/>
+        </Button>
+      </StackPanel>
       <ContentControl Content="{Binding ContentViewModel}"/>
     </DockPanel>
   </Border>

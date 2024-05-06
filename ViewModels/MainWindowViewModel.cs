@@ -14,11 +14,13 @@ public class MainWindowViewModel : ViewModelBase {
   static MainWindowViewModel() { _Locale("en-US"); }
   #pragma warning restore
 
-  private TranslatorModel Translator { get; set; } = new();
+  private TranslatorModel Translator { get; set; }
+  private HistoryModel History { get; set; }
 
   // public IResourceDictionary LocaleDict { get; set; }
   public PromptsViewModel Prompts { get; private set; }
   public LanguagesViewModel Languages { get; private set; }
+  public SettingsViewModel Settings { get; private set; }
   public ViewModelBase _ContentViewModel;
   public ViewModelBase ContentViewModel {
     get => _ContentViewModel;
@@ -32,7 +34,22 @@ public class MainWindowViewModel : ViewModelBase {
   public MainWindowViewModel() {
     Prompts = new(this);
     Languages = new(this);
+    Settings = new();
+    Translator = new();
+    History = new();
     _ContentViewModel = Prompts;
+  }
+
+  public void ToggleSettings() {
+    if (ContentViewModel is not SettingsViewModel)
+      ContentViewModel = Settings;
+    else ContentViewModel = Prompts;
+  }
+
+  public void ToggleHistory() {
+    var db = Settings.Database;
+    History.ResetHistory(db.User, db.Server, db.Password);
+
   }
 
   public void ChangeTheme(string theme) {
@@ -78,7 +95,7 @@ public class MainWindowViewModel : ViewModelBase {
       Engine.Google,
       Languages.LeftSelected.Lang,
       Languages.RightSelected.Lang,
-      Lang.English
+      Lang.Russian
     );
   }
 }

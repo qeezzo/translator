@@ -1,17 +1,32 @@
 #pragma once
+#include <qonlinetranslator.h>
+
 #include <boost/asio/query.hpp>
 #include <cstddef>
-#include <qonlinetranslator.h>
 #include <string>
 
 // QUERY CLIENT -> SERVER
 
-struct Query {
-  using Engine = QOnlineTranslator::Engine;
-  using Lang = QOnlineTranslator::Language;
-  using byte_iter = std::vector<std::byte>::iterator;
+enum class QueryType : int {
+  undefined       = -1,
+  begin           = 0,
+  TranslateQuery  = 1,
+  DataConfigQuery = 2,
+  end
+};
 
-  bool is_valid() const { return valid; }
+struct Query {
+  Query()         = default;
+  using byte_iter = std::vector<std::byte>::iterator;
+  virtual auto from_bytes(byte_iter begin, byte_iter end) -> bool = 0;
+};
+
+struct TranslateQuery : public Query {
+  using Engine = QOnlineTranslator::Engine;
+  using Lang   = QOnlineTranslator::Language;
+
+  static constexpr int query_min_size =
+      sizeof(Engine) + sizeof(Lang) * 3 + sizeof(size_t);
 
   Engine engine;
   Lang source;
@@ -21,14 +36,22 @@ struct Query {
   size_t size;
   std::string data;
 
-  static constexpr int query_min_size =
-      sizeof(Engine) + sizeof(Lang) * 3 + sizeof(size_t);
+  TranslateQuery() = default;
 
-  Query() = default;
-  Query(byte_iter begin, byte_iter end);
-  
-  auto from_bytes(byte_iter begin, byte_iter end) -> void;
+  auto from_bytes(byte_iter begin, byte_iter end) -> bool override;
+};
 
-private:
+struct DatabaseConfigQuery : public Query {
+  std::string user;
+  std::string server;
+  std::string password;
+
+  DatabaseConfigQuery() = default;
+
+  auto from_bytes(byte_iter begin, byte_iter end) -> bool override;
+
+ private:
   bool valid = true;
+
+  auto get_string(byte_iter& begin, byte_iter end) -> std::string;
 };

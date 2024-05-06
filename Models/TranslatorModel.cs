@@ -1,9 +1,7 @@
 using System;
-using System.Text;
-using System.Net.Sockets;
-using translator.Models.Utils;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using translator.Models.Queries;
+using System.Collections.Generic;
 
 namespace translator.Models;
 
@@ -15,23 +13,15 @@ public class TranslatorModel {
       Languages.Add(new Language(lang));
   }
 
-  public void Dispose() {
-    server.Close();
-  }
+  private Client Client = Client.GetClient();
 
-  public TranslatorModel(int buffer_size = 1024*10) {
-    buffer = new byte[buffer_size];
-    TryConnect();
-  }
+  public TranslatorModel() {}
 
   public TranslationResponse Translate(string data, Engine engine, Lang source, Lang dest, Lang ui) {
-    if (!server.Connected) {
-      var try_connect = TryConnect();
-      if (!try_connect.Item1)
-        return new TranslationResponse { error = try_connect.Item2};
-    }
+    if (!Client.Connected && !Client.Connect())
+      return new() { error = Client.Error};
 
-    Query query = new Query {
+    Query query = new TranslatorQuery {
       engine = engine,
       source = source,
       dest = dest,
@@ -39,47 +29,14 @@ public class TranslatorModel {
       data = data.ToCharArray()
     };
 
-    Write(query);
-    int bytes_read = ReadToBuffer();
-    string response = GetStringFromBuffer(bytes_read);
-    TranslationResponse translation = ParseJsonResponse(response);
+    Client.Write(query);
+    string response = Client.ReadString();
+    if (string.IsNullOrEmpty(response))
+      return new() { error = Client.Error };
 
-    return translation;
+    return ParseJsonResponse(response);
   }
 
-
-  private TcpClient server = new();
-  private NetworkStream? stream = null;
-  private byte[] buffer;
-
-  private (bool, string) TryConnect() {
-    System.Console.Write("Connecting ... ");
-    try {
-      server.Connect("127.0.0.1", 30000);
-    } catch (SocketException e) {
-      System.Console.WriteLine("Failed");
-      return (false, e.Message);
-    }
-    System.Console.WriteLine("Connected");
-    stream = server.GetStream();
-    return (true, "");
-  }
-  private void Write(Query query) {
-    var bytes = query.ToBytes();
-    System.Console.Write("Writing: " + bytes.Length);
-    stream?.Write(bytes);
-    System.Console.WriteLine(" ... Written");
-  }
-  private int ReadToBuffer() {
-    System.Console.Write("Reading: ");
-    int bytes_read = stream?.Read(buffer) ?? 0;
-    System.Console.WriteLine(bytes_read + "... Read");
-    return bytes_read;
-  }
-  private string GetStringFromBuffer(int count) {
-    string result = Encoding.Default.GetString(buffer, 0, count);
-    return result;
-  }
   private TranslationResponse ParseJsonResponse(string json) {
     return JsonConvert.DeserializeObject<TranslationResponse>(json);
   }

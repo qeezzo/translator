@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.15.0)
 
 project(server LANGUAGES CXX)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS OFF)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_CXX_STANDARD 23)
+
 add_subdirectory(QOnlineTranslator)
+add_subdirectory(History)
+
 find_package(Qt5 REQUIRED COMPONENTS Core)
 
 add_executable(server
@@ -15,4 +18,9 @@ add_executable(server
     Query.cpp
 )
 
-target_link_libraries(server PRIVATE Qt5::Core QOnlineTranslator)
+target_link_libraries(
+  server PRIVATE
+  Qt5::Core
+  QOnlineTranslator
+  history
+)

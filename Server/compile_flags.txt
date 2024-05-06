@@ -1,3 +1,10 @@
+-xc++
+-std=gnu++2b
+-D__cpp_concepts=202002L
+-I/usr/include/mysql
+-I/usr/include/mysql++
+-I/usr/include/c++/13.2.1
+-I./History
 -I./QOnlineTranslator/src
 -I/usr/include/qt
 -DQT_CORE_LIB
@@ -6,10 +13,10 @@
 -DQT_NETWORK_LIB
 -DQT_NO_DEBUG
 -I./build/test_autogen/include
--isystem /usr/include/qt
--isystem /usr/include/qt/QtCore
--isystem /usr/lib/qt/mkspecs/linux-g++
--isystem /usr/include/qt/QtMultimedia
--isystem /usr/include/qt/QtNetwork
--isystem /usr/include/qt/QtGui
+-isystem/usr/include/qt
+-isystem/usr/include/qt/QtCore
+-isystem/usr/lib/qt/mkspecs/linux-g++
+-isystem/usr/include/qt/QtMultimedia
+-isystem/usr/include/qt/QtNetwork
+-isystem/usr/include/qt/QtGui
 -fPIC

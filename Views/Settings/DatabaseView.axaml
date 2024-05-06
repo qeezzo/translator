@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
+        xmlns:vm="using:translator.ViewModels.Settings"
+        x:CompileBindings="True"
+        x:Class="translator.Views.Settings.DatabaseView"
+        x:DataType="vm:DatabaseViewModel">
+
+  <StackPanel>
+    <TextBlock Classes="settings" Text="server"/>
+    <TextBox Classes="settings" Text="{Binding Server}"/>
+    <TextBlock Classes="settings" Text="user name"/>
+    <TextBox Classes="settings" Text="{Binding User}"/>
+    <TextBlock Classes="settings" Text="password"/>
+    <TextBox Classes="settings" Text="{Binding Password}"/>
+  </StackPanel>
+
+</UserControl>

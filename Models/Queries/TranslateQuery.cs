@@ -1,16 +1,17 @@
 using System.IO;
 using System.Text;
 
-namespace translator.Models.Utils;
+namespace translator.Models.Queries;
 
-public struct Query {
+public class TranslatorQuery : Query {
+  public override QueryType Type => QueryType.TranslatorQuery;
   public Engine engine;
   public Lang source;
   public Lang dest;
   public Lang ui;
-  public char[] data;
+  public char[] data = [];
 
-  public byte[] ToBytes() {
+  public override byte[] InnerBytes() {
     var stream = new MemoryStream();
     var writer = new BinaryWriter(stream);
 

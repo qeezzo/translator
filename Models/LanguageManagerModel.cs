@@ -158,8 +158,8 @@ public enum Lang {
     Zulu
 };
 public enum Engine {
-    Google,
-    Yandex,
+    Google = 1,
+    Yandex = 2,
     Bing,
     LibreTranslate,
     Lingva
