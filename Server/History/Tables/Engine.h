@@ -7,15 +7,15 @@
 
 namespace Tables {
 
-class Language : public Table<std::pair<int, std::string>> {
+class Engine : public Table {
  public:
   using value_type = std::pair<int, std::string>;
 
-  Language(mysqlpp::Connection& conn, std::string name);
+  Engine(mysqlpp::Connection& conn, std::string name);
 
   auto get() -> std::vector<value_type>;
 
-  auto insert(const value_type&) -> bool override;
+  auto insert(const value_type&) -> bool;
   auto create() -> bool;
 };
 

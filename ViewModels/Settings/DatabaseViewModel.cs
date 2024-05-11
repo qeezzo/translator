@@ -1,7 +1,7 @@
 namespace translator.ViewModels.Settings;
 
 public class DatabaseViewModel : ViewModelBase {
-  public string User { get; set; } = "renat";
-  public string Server { get; set; } = "localhost";
-  public string Password { get; set; } = "renatus";
+  public string User { get; set; } = "root";
+  public string Server { get; set; } = "renatus";
+  public string Password { get; set; } = "8915";
 }

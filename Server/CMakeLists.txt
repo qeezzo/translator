@@ -19,8 +19,8 @@ add_executable(server
 )
 
 target_link_libraries(
-  server PRIVATE
+  server PUBLIC
+  his
   Qt5::Core
   QOnlineTranslator
-  history
 )

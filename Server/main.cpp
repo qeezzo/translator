@@ -2,8 +2,6 @@
 #include <boost/asio/query.hpp>
 #include <iostream>
 
-#include "./History/history.h"
-
 #include "Server.h"
 
 using namespace boost::asio;

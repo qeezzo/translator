@@ -15,12 +15,13 @@ public class MainWindowViewModel : ViewModelBase {
   #pragma warning restore
 
   private TranslatorModel Translator { get; set; }
-  private HistoryModel History { get; set; }
+  private HistoryModel HistoryModel { get; set; }
 
   // public IResourceDictionary LocaleDict { get; set; }
   public PromptsViewModel Prompts { get; private set; }
   public LanguagesViewModel Languages { get; private set; }
   public SettingsViewModel Settings { get; private set; }
+  public HistoryViewModel History { get; private set; }
   public ViewModelBase _ContentViewModel;
   public ViewModelBase ContentViewModel {
     get => _ContentViewModel;
@@ -36,7 +37,12 @@ public class MainWindowViewModel : ViewModelBase {
     Languages = new(this);
     Settings = new();
     Translator = new();
+    HistoryModel = new();
     History = new();
+
+    var db = Settings.Database;
+    HistoryModel.ResetHistory(db.User, db.Server, db.Password);
+
     _ContentViewModel = Prompts;
   }
 
@@ -48,8 +54,12 @@ public class MainWindowViewModel : ViewModelBase {
 
   public void ToggleHistory() {
     var db = Settings.Database;
-    History.ResetHistory(db.User, db.Server, db.Password);
 
+    History.History = HistoryModel.History;
+
+    if (ContentViewModel is not HistoryViewModel)
+      ContentViewModel = History;
+    else ContentViewModel = Prompts;
   }
 
   public void ChangeTheme(string theme) {

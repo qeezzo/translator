@@ -4,12 +4,10 @@
 
 namespace Tables {
 
-template <typename T>
 class Table {
  public:
   Table(mysqlpp::Connection& conn, std::string name) : conn(conn), name(name) {}
 
-  virtual auto insert(const T&) -> bool = 0;
   auto clear() -> bool {
     return (conn.query() << "delete from " << name).exec();
   }

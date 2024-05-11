@@ -10,15 +10,22 @@ public class HistoryModel {
 
   public HistoryModel() {}
 
+  public List<(int, string)> _History = [];
+  public List<(int, string)> History {
+    get {
+      if (!CheckConnection())
+        return [];
+      return _History;
+    }
+  private
+    set { _History = value; }
+  }
+
   public void ResetHistory(string user, string server, string password) {
-    if (!Client.Connected && Client.Connect())
+    if (!CheckConnection())
       return;
 
-    Query query = new DatabaseConfigQuery {
-      User = user,
-      Server = server,
-      Password = password
-    };
+    Query query = new DatabaseConfigQuery { User = user, Server = server, Password = password };
 
     Client.Write(query);
     var bytes = Client.Read();
@@ -30,13 +37,12 @@ public class HistoryModel {
     }
   }
 
-  public List<(int, string)> History { get; private set; } = [];
-
   private List<(int, string)> ParseHistory(byte[] bytes) {
-    if (bytes.Length < sizeof(Int32)) return [];
+    if (bytes.Length < sizeof(Int32))
+      return [];
 
     int index = 0;
-    int size = BitConverter.ToInt32(bytes, index);
+    int size  = BitConverter.ToInt32(bytes, index);
     index += sizeof(Int32);
 
     List<(int, string)> result = [];
@@ -44,12 +50,14 @@ public class HistoryModel {
       int item_id = BitConverter.ToInt32(bytes, index);
       index += sizeof(Int32);
 
-      if (index + sizeof(Int32) > bytes.Length) return result;
+      if (index + sizeof(Int32) > bytes.Length)
+        return result;
 
       int item_size = BitConverter.ToInt32(bytes, index);
       index += sizeof(Int32);
 
-      if (index + item_size > bytes.Length) return result;
+      if (index + item_size > bytes.Length)
+        return result;
 
       string source = Encoding.Default.GetString(bytes, index, item_size);
       index += item_size;
@@ -58,5 +66,9 @@ public class HistoryModel {
     }
 
     return result;
+  }
+
+  private bool CheckConnection() {
+    return Client.Connected || Client.Connect();
   }
 }

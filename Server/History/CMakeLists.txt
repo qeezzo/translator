@@ -1,26 +1,37 @@
 find_package(Qt5 REQUIRED COMPONENTS Core)
 
 add_library(
-  history STATIC
+  his STATIC
 
-  history.h
-  history.cpp
-
-  Engine.h
-  Engine.cpp
   History.h
   History.cpp
-  Language.h
-  Language.cpp
-  Translation.h
-  Translation.cpp
+
+  Tables/Engine.h
+  Tables/Engine.cpp
+  Tables/History.h
+  Tables/History.cpp
+  Tables/Language.h
+  Tables/Language.cpp
+  Tables/Translation.h
+  Tables/Translation.cpp
+
+  Tables/Example/Example.h
+  Tables/Example/Example.cpp
+  Tables/Example/ExampleType.h
+  Tables/Example/ExampleType.cpp
+
+  Tables/Option/Option.h
+  Tables/Option/Option.cpp
+  Tables/Option/OptionType.h
+  Tables/Option/OptionType.cpp
+  Tables/Option/OptionTranslations.h
+  Tables/Option/OptionTranslations.cpp
 )
 
 target_include_directories(
-  history
+  his
   PUBLIC .
   /usr/include/mysql
   /usr/include/mysql++
-  ../QOnlineTranslator/src
 )
-target_link_libraries(history PRIVATE mysqlpp)
+target_link_libraries(his PUBLIC mysqlpp)

@@ -13,6 +13,24 @@ class Translator {
   using Lang   = QOnlineTranslator::Language;
   using Engine = QOnlineTranslator::Engine;
 
+  struct Translation {
+    QString m_sourceTranscription;
+    QString m_sourceTranslit;
+    Lang m_sourceLang;
+
+    QString m_translation;
+    QString m_translationTranscription;
+    QString m_translationTranslit;
+    Lang m_translationLang;
+
+    QMap<QString, QVector<QOption>> m_options;
+    QMap<QString, QVector<QExample>> m_examples;
+
+    QString m_error;
+
+    auto to_json() const -> std::string;
+  };
+
   Translator(int argc, char *argv[]);
 
   auto translate(
@@ -27,20 +45,21 @@ class Translator {
   auto languages() const -> std::vector<std::pair<int, std::string>>;
   auto engines() const -> std::vector<std::pair<int, std::string>>;
 
-  auto json() -> std::string&&;
-  auto translation() -> std::string&&;
+  auto translation() const -> Translation;
+
+  auto error() const -> std::string;
 
  private:
-  std::string m_json;
-  std::string m_translation;
+
+  Translation m_translation;
+
   QCoreApplication app;
   QOnlineTranslator translator;
 
-  std::string error;
+  std::string m_error;
 
   mutable std::vector<std::pair<int, std::string>> langs;
   mutable std::vector<std::pair<int, std::string>> engs;
 
-  auto to_string(const QString& str) const -> std::string;
   void on_translation_finished();
 };

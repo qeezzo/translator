@@ -9,24 +9,24 @@ Translation::Translation(mysqlpp::Connection& conn, std::string name)
 auto Translation::create(const string& engine, const string& language) -> bool {
   auto query = conn.query()
                << "create table %0("
-               << "id int primary key auto_increment,"
-               << "source varchar(1000) not null,"
+               << "translation_id int primary key auto_increment,"
+               << "source varchar(1024) not null,"
                << "source_lang int not null,"
-               << "translation varchar(1200) not null,"
+               << "translation varchar(2048) not null,"
                << "translation_lang int not null,"
                << "ui_lang int not null,"
                << "engine int not null,"
-               << "foreign key (source_lang) references %1 (id),"
-               << "foreign key (translation_lang) references %1 (id),"
-               << "foreign key (ui_lang) references %1 (id),"
-               << "foreign key (engine) references %2 (id))";
+               << "foreign key (source_lang) references %1 (language_id),"
+               << "foreign key (translation_lang) references %1 (language_id),"
+               << "foreign key (ui_lang) references %1 (language_id),"
+               << "foreign key (engine) references %2 (engine_id))";
 
   query.parse();
   return query.execute(name, language, engine);
 }
 
 auto Translation::insert(const value_type& data) -> bool {
-  auto query = conn.query() << "insert into %0 (id, source, source_lang, "
+  auto query = conn.query() << "insert into %0 (translation_id, source, source_lang, "
                                "translation, translation_lang, ui_lang, "
                                "engine) values (null, %1q, %2, %3q, %4, %5,%6)";
   query.parse();

@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:translator.ViewModels"
+        x:CompileBindings="True"
+        x:Class="translator.Views.HistoryView"
+        x:DataType="vm:HistoryViewModel">
+
+  <UserControl.Styles>
+    <Style Selector="ListBoxItem">
+      <Setter Property="FontSize" Value="18" />
+
+      <Style Selector="^:pointerover /template/ ContentPresenter">
+        <!-- <Setter Property="Background" Value="#222" /> -->
+      </Style>
+
+      <Style Selector="^:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#222" />
+        <Setter Property="Foreground" Value="#f66"/>
+      </Style>
+    </Style>
+  </UserControl.Styles>
+
+  <DockPanel>
+    <ListBox  DockPanel.Dock="Left"
+              Width="200"
+              CornerRadius="10 0 0 10"
+              ItemsSource="{Binding History}"
+              SelectedItem="{Binding HistoryItem}"
+              SelectionMode="Single,Toggle">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+            <TextBlock Text="{Binding}"/>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <!-- <ContentControl Background="#222" -->
+    <!--                 Padding="20 0" -->
+    <!--                 CornerRadius="0 10 10 0" -->
+    <!--                 Content="{Binding ContentViewModel}"/> -->
+
+      <TextBlock Text="Something here"/>
+  </DockPanel>
+
+</UserControl>

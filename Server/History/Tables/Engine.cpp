@@ -7,13 +7,13 @@ Engine::Engine(mysqlpp::Connection& conn, std::string name)
 
 auto Engine::create() -> bool {
   auto query = conn.query() << "create table " << name << "("
-                            << "id int primary key,"
+                            << "engine_id int primary key,"
                             << "name varchar(32) not null)";
   return query.exec();
 }
 
 auto Engine::insert(const value_type& data) -> bool {
-  auto query = conn.query() << "insert into %0 (id, name) values (%1, %2q)";
+  auto query = conn.query() << "insert into %0 (engine_id, name) values (%1, %2q)";
   query.parse();
   const auto& [id, engine] = data;
   return query.execute(name, id, engine);

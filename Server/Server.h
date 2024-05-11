@@ -4,10 +4,11 @@
 #include <expected>
 #include <unordered_map>
 
+#include "Example.h"
+#include "History.h"
+#include "Option.h"
 #include "ServerConnection.h"
 #include "Translator.h"
-#include "history.h"
-
 
 class Server {
  public:
@@ -18,6 +19,7 @@ class Server {
  private:
   using error_code    = boost::system::error_code;
   using handle_result = std::expected<std::vector<std::byte>, std::string>;
+  using Translation   = Translator::Translation;
 
   ServerConnection connection;
   Translator translator;
@@ -40,9 +42,24 @@ class Server {
 
   auto new_connection() -> bool;
   auto new_history() -> bool;
+  auto save_to_history(
+      const TranslateQuery& source, const Translation& translation
+  ) -> bool;
+  auto get_from_history(const TranslateQuery& source)
+      -> std::optional<Translation>;
+
+  auto from_standard(std::map<std::string, std::vector<Example>>& map)
+      -> QMap<QString, QVector<QExample>>;
+  auto from_standard(std::map<std::string, std::vector<Option>>& map)
+      -> QMap<QString, QVector<QOption>>;
+  auto to_standard(std::map<QString, QVector<QExample>>&)
+      -> std::map<std::string, std::vector<Example>>;
+  auto to_standard(std::map<QString, QVector<QOption>>&)
+      -> std::map<std::string, std::vector<Option>>;
 
   auto handle_translate() -> handle_result;
   auto handle_database_config() -> handle_result;
+  auto handle_history() -> handle_result;
 
   auto check_error(const error_code& err) -> bool;
 

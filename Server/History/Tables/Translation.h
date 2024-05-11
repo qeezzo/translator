@@ -16,7 +16,7 @@ struct TranslationType {
   std::string translation;
 };
 
-class Translation : public Table<TranslationType> {
+class Translation : public Table {
  public:
   using value_type = TranslationType;
 
@@ -24,7 +24,7 @@ class Translation : public Table<TranslationType> {
 
   auto create(const std::string& engine, const std::string& language) -> bool;
 
-  auto insert(const value_type&) -> bool override;
+  auto insert(const value_type&) -> bool;
 
   auto search(value_type&) -> bool;
 };
