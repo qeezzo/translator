@@ -1,17 +1,18 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
-        xmlns:vm="using:translator.ViewModels"
-        xmlns:models="using:translator.Models"
-        x:CompileBindings="True"
-        x:Class="translator.Views.SettingsView"
-        x:DataType="vm:SettingsViewModel">
+<UserControl  xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="500"
+              xmlns:vm="using:translator.ViewModels"
+              xmlns:models="using:translator.Models"
+              x:CompileBindings="True"
+              x:Class="translator.Views.SettingsView"
+              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+              x:DataType="vm:SettingsViewModel">
 
-  <UserControl.DataContext>
-    <vm:SettingsViewModel/>
-  </UserControl.DataContext>
+  <UserControl.Resources>
+    <vm:LocaleConverter x:Key="LocaleConverter" />
+  </UserControl.Resources>
 
   <UserControl.Styles>
     <Style Selector="ListBoxItem">
@@ -36,11 +37,12 @@
               SelectedItem="{Binding Category}"
               SelectionMode="Single,Toggle"
               Name="Languages">
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-            <TextBlock Text="{Binding}"/>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
+    <ListBox.ItemTemplate>
+      <DataTemplate>
+        <!-- <TextBlock Text="{DynamicResource {Binding}}"/> -->
+        <TextBlock Text="{Binding Converter={StaticResource LocaleConverter}}" />
+      </DataTemplate>
+    </ListBox.ItemTemplate>
     </ListBox>
 
     <ContentControl Background="#222"

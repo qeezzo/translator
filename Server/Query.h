@@ -12,6 +12,7 @@ enum class QueryType : int {
   begin           = 0,
   TranslateQuery  = 1,
   DataConfigQuery = 2,
+  HistoryQuery    = 3,
   end
 };
 
@@ -54,4 +55,12 @@ struct DatabaseConfigQuery : public Query {
   bool valid = true;
 
   auto get_string(byte_iter& begin, byte_iter end) -> std::string;
+};
+
+struct HistoryQuery : public Query {
+  int id;
+
+  HistoryQuery() = default;
+
+  auto from_bytes(byte_iter begin, byte_iter end) -> bool override;
 };

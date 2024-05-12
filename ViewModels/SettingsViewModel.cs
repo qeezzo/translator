@@ -1,5 +1,8 @@
-using System.Collections.ObjectModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using Avalonia.Data.Converters;
 
 using translator.ViewModels.Settings;
 
@@ -30,22 +33,46 @@ public class SettingsViewModel : ViewModelBase {
     }
   }
 
-  public ObservableCollection<string> Settings { get; }
+  static public string LocaleSettings(string settings) {
+    return (string)(MainWindowViewModel.LocaleDict[settings] ?? "...");
+  }
 
-  public SettingsViewModel() {
+  public List<string> Settings { get; private set; }
+
+  public void UpdateSettings() {
+    Settings = [
+      "Settings.General",
+      "Settings.Database"
+    ];
+    RaisePropertyChanged(nameof(Settings));
+  }
+
+  public SettingsViewModel(MainWindowViewModel m) {
     Blank = new();
-    General = new();
+    General = new(m);
     Database = new();
 
     map = new(){
-      {"empty",    Blank},
-      {"General",  General},
-      {"Database", Database}
+      {"empty",             Blank},
+      {"Settings.General",  General},
+      {"Settings.Database", Database}
     };
 
     Settings = [
-      "General",
-      "Database"
+      "Settings.General",
+      "Settings.Database"
     ];
+  }
+}
+
+public class LocaleConverter : IValueConverter {
+
+  public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {
+    return (string)(MainWindowViewModel.LocaleDict[(string)value!] ?? "...");
+  }
+
+  public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+  {
+    throw new NotImplementedException();
   }
 }

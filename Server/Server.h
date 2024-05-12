@@ -32,6 +32,7 @@ class Server {
       handles_for_query_types{
           {QueryType::TranslateQuery, &Server::handle_translate},
           {QueryType::DataConfigQuery, &Server::handle_database_config},
+          {QueryType::HistoryQuery, &Server::handle_history},
       };
 
   auto recieve_query() -> bool;
@@ -47,6 +48,7 @@ class Server {
   ) -> bool;
   auto get_from_history(const TranslateQuery& source)
       -> std::optional<Translation>;
+  auto get_from_history(int id) -> std::optional<Translation>;
 
   auto from_standard(std::map<std::string, std::vector<Example>>& map)
       -> QMap<QString, QVector<QExample>>;

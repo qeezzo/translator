@@ -9,8 +9,31 @@
         x:DataType="vm:GeneralViewModel">
 
   <StackPanel>
-    <TextBlock Text="anythins"/>
-    <TextBox Text="blah blah"/>
+
+    <TextBlock Classes="settings" Text="{DynamicResource Settings.General.Language}"/>
+    <ComboBox Classes="settings"
+              ItemsSource="{Binding Languages}"
+              SelectedItem="{Binding Language}"
+              MaxDropDownHeight="100">
+      <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding String}"/>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+
+    <TextBlock Classes="settings" Text="{DynamicResource Settings.General.Engine}"/>
+    <ComboBox Classes="settings"
+              ItemsSource="{Binding Engines}"
+              SelectedItem="{Binding Engine}"
+              MaxDropDownHeight="100">
+      <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}"/>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+
   </StackPanel>
 
 </UserControl>

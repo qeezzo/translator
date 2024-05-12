@@ -37,7 +37,7 @@ public class TranslatorModel {
     return ParseJsonResponse(response);
   }
 
-  private TranslationResponse ParseJsonResponse(string json) {
+  static public TranslationResponse ParseJsonResponse(string json) {
     return JsonConvert.DeserializeObject<TranslationResponse>(json);
   }
 }

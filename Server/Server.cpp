@@ -149,6 +149,26 @@ auto Server::handle_database_config() -> handle_result {
 
   return bytes;
 }
+auto Server::handle_history() -> handle_result {
+  std::clog << "History query" << std::endl;
+  HistoryQuery query;
+  auto begin = buf.begin();
+  if (not query.from_bytes(begin + sizeof(int32_t), begin + bytes_read))
+    return std::unexpected("wrong query data");
+
+  Translation translation;
+  if (auto opt = get_from_history(query.id); opt) {
+    std::clog << "got from history" << std::endl;
+    translation = opt.value();
+  }
+
+  auto json = translation.to_json();
+  std::vector<std::byte> bytes(
+      (std::byte*)json.data(), (std::byte*)json.data() + json.size()
+  );
+
+  return bytes;
+}
 
 auto Server::new_connection() -> bool {
   if (not connection.accept()) return false;
@@ -180,6 +200,25 @@ auto Server::save_to_history(
   return res;
 }
 
+auto Server::get_from_history(int id)
+    -> std::optional<Translation> {
+  if (not history.connected()) return {};
+
+  auto translation = history.search(id);
+
+  if (not translation) return {};
+
+  using Lang = Translator::Lang;
+  Translation q{
+      .m_sourceLang      = (Lang)translation->source_lang,
+      .m_translation     = QString::fromStdString(translation->translation),
+      .m_translationLang = (Lang)translation->translation_lang,
+      .m_options         = from_standard(translation->options),
+      .m_examples        = from_standard(translation->examples),
+  };
+
+  return q;
+}
 auto Server::get_from_history(const TranslateQuery& source)
     -> std::optional<Translation> {
   if (not history.connected()) return {};

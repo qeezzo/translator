@@ -122,6 +122,28 @@ auto History::save(const Translation& translation) -> bool {
   return true;
 }
 
+auto History::search(int id) -> std::optional<Translation> {
+  auto query = conn.query()
+               << "select source_lang, translation, translation_lang, ui_lang, "
+                  "engine from %0 where translation_id = %1";
+  query.parse();
+  auto res = query.store(this->translation.table(), id);
+
+  if (not res or res.empty()) return {};
+
+  Translation translation {
+    .source_lang = res.front()[0],
+    .translation = (std::string)res.front()[1],
+    .translation_lang = res.front()[2],
+    .ui_lang = res.front()[4],
+    .engine = res.front()[3],
+    .options = search_for_options(id),
+    .examples = search_for_examples(id)
+  };
+
+  return translation;
+}
+
 auto History::search(
     const std::string& source, int source_lang, int translation_lang,
     int ui_lang, int engine

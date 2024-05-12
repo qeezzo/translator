@@ -9,11 +9,11 @@
         x:DataType="vm:DatabaseViewModel">
 
   <StackPanel>
-    <TextBlock Classes="settings" Text="server"/>
+    <TextBlock Classes="settings" Text="{DynamicResource Settings.Database.Server}"/>
     <TextBox Classes="settings" Text="{Binding Server}"/>
-    <TextBlock Classes="settings" Text="user name"/>
+    <TextBlock Classes="settings" Text="{DynamicResource Settings.Database.UserName}"/>
     <TextBox Classes="settings" Text="{Binding User}"/>
-    <TextBlock Classes="settings" Text="password"/>
+    <TextBlock Classes="settings" Text="{DynamicResource Settings.Database.Password}"/>
     <TextBox Classes="settings" Text="{Binding Password}"/>
   </StackPanel>
 

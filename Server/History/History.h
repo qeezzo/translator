@@ -64,6 +64,7 @@ class History {
   auto get_history() -> std::vector<std::pair<int, std::string>>;
 
   auto save(const Translation& translation) -> bool;
+  auto search(int id) -> std::optional<Translation>;
   auto search(
       const std::string& source, int source_lang, int translation_lang,
       int ui_lang, int engine

@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:translator.ViewModels"
+        xmlns:views="using:translator.Views"
         x:CompileBindings="True"
         x:Class="translator.Views.HistoryView"
         x:DataType="vm:HistoryViewModel">
@@ -31,17 +32,16 @@
               SelectionMode="Single,Toggle">
       <ListBox.ItemTemplate>
         <DataTemplate>
-            <TextBlock Text="{Binding}"/>
+            <TextBlock Text="{Binding Source}" TextTrimming="CharacterEllipsis"/>
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
 
-    <!-- <ContentControl Background="#222" -->
-    <!--                 Padding="20 0" -->
-    <!--                 CornerRadius="0 10 10 0" -->
-    <!--                 Content="{Binding ContentViewModel}"/> -->
+    <views:OutputPromptView Padding="10"
+                            Background="#222"
+                            CornerRadius="0 10 10 0"
+                            DataContext="{Binding Translation}"/>
 
-      <TextBlock Text="Something here"/>
   </DockPanel>
 
 </UserControl>

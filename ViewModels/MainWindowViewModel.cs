@@ -35,13 +35,10 @@ public class MainWindowViewModel : ViewModelBase {
   public MainWindowViewModel() {
     Prompts = new(this);
     Languages = new(this);
-    Settings = new();
+    Settings = new(this);
     Translator = new();
     HistoryModel = new();
-    History = new();
-
-    var db = Settings.Database;
-    HistoryModel.ResetHistory(db.User, db.Server, db.Password);
+    History = new(HistoryModel);
 
     _ContentViewModel = Prompts;
   }
@@ -53,7 +50,9 @@ public class MainWindowViewModel : ViewModelBase {
   }
 
   public void ToggleHistory() {
+    // TODO: WASTEFULNESS!!! change some time
     var db = Settings.Database;
+    HistoryModel.ResetHistory(db.User, db.Server, db.Password);
 
     History.History = HistoryModel.History;
 
@@ -79,6 +78,7 @@ public class MainWindowViewModel : ViewModelBase {
   public void Locale(string locale) {
     _Locale(locale);
     Languages.UpdateLists();
+    Settings.UpdateSettings();
   }
 
   static void _Locale(string locale) {
@@ -89,8 +89,6 @@ public class MainWindowViewModel : ViewModelBase {
     if (translations != null)
       App.Current!.Resources.MergedDictionaries.Remove(translations);
 
-    // var resource = AssetLoader.Open(new Uri($"avares://LocalizationSample/Assets/Lang/{targetLanguage}.axaml"));
-
     var newDictionary = new ResourceInclude(new Uri($"avares://translator/Assets/Lang/{locale}.axaml")) {
         Source = new Uri($"avares://translator/Assets/Lang/{locale}.axaml")
     };
@@ -100,9 +98,9 @@ public class MainWindowViewModel : ViewModelBase {
   }
 
   public void Translate(object obj) {
-    Prompts.Right = Translator.Translate(
+    Prompts.Right.Translation = Translator.Translate(
       Prompts.Left,
-      Engine.Google,
+      Settings.General.Engine,
       Languages.LeftSelected.Lang,
       Languages.RightSelected.Lang,
       Lang.Russian

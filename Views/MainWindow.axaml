@@ -17,13 +17,19 @@
   </Design.DataContext>
 
   <Window.Styles>
+    <Style Selector="ComboBox.settings">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
     <Style Selector="TextBox.settings">
         <Setter Property="Width" Value="200" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="FontSize" Value="16" />
     </Style>
     <Style Selector="TextBlock.settings">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Margin" Value="0 20 0 5" />
+        <Setter Property="FontSize" Value="16" />
     </Style>
     <Style Selector="TextBlock">
         <Setter Property="FontFamily" Value="Noto Sans" />

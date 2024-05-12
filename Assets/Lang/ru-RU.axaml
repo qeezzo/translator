@@ -6,6 +6,17 @@
   <v:String x:Key="Prompt.Options">варианты перевода:</v:String>
   <v:String x:Key="Prompt.Examples">примеры:</v:String>
 
+  <v:String x:Key="Settings.General">Общие</v:String>
+  <v:String x:Key="Settings.General.Engine">Движочек:</v:String>
+  <v:String x:Key="Settings.General.Language">Язык интерфейса:</v:String>
+  <v:String x:Key="Settings.General.ru_RU">Русский ru-RU</v:String>
+  <v:String x:Key="Settings.General.en_US">Английский en-US</v:String>
+
+  <v:String x:Key="Settings.Database">База данных</v:String>
+  <v:String x:Key="Settings.Database.Server">Хост</v:String>
+  <v:String x:Key="Settings.Database.UserName">Пользователь</v:String>
+  <v:String x:Key="Settings.Database.Password">Пароль</v:String>
+
   <v:String x:Key="Auto">Авто</v:String>
   <v:String x:Key="Russian">Русский</v:String>
   <v:String x:Key="English">Английский</v:String>

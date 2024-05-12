@@ -40,6 +40,7 @@ auto DatabaseConfigQuery::from_bytes(byte_iter begin, byte_iter end) -> bool {
 
   return valid;
 }
+
 auto DatabaseConfigQuery::get_string(byte_iter& begin, byte_iter end) -> std::string {
   if (std::distance(begin, end) < sizeof(int32_t)) {
     valid = false;
@@ -62,4 +63,14 @@ auto DatabaseConfigQuery::get_string(byte_iter& begin, byte_iter end) -> std::st
   begin += user_size;
 
   return res;
+}
+
+auto HistoryQuery::from_bytes(byte_iter begin, byte_iter end) -> bool {
+  auto it = begin;
+
+  if (distance(it, end) != 4) return false;
+
+  id = *reinterpret_cast<int32_t*>(&*it);
+
+  return true;
 }

@@ -4,7 +4,8 @@ namespace translator.Models.Queries;
 
 public enum QueryType {
   TranslatorQuery = 1,
-  DatabaseConfigQuery = 2
+  DatabaseConfigQuery = 2,
+  History = 3,
 }
 
 public abstract class Query {
