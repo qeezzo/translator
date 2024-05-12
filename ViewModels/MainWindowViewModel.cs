@@ -55,7 +55,7 @@ public class MainWindowViewModel : ViewModelBase {
       var db = Settings.Database;
       HistoryModel.ResetHistory(db.User, db.Server, db.Password);
 
-      History.History = HistoryModel.History;
+      History.AllHistory = HistoryModel.History;
       ContentViewModel = History;
     }
     else ContentViewModel = Prompts;
