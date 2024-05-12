@@ -50,14 +50,14 @@ public class MainWindowViewModel : ViewModelBase {
   }
 
   public void ToggleHistory() {
-    // TODO: WASTEFULNESS!!! change some time
-    var db = Settings.Database;
-    HistoryModel.ResetHistory(db.User, db.Server, db.Password);
+    if (ContentViewModel is not HistoryViewModel) {
+      // TODO: WASTEFULNESS!!! change some time
+      var db = Settings.Database;
+      HistoryModel.ResetHistory(db.User, db.Server, db.Password);
 
-    History.History = HistoryModel.History;
-
-    if (ContentViewModel is not HistoryViewModel)
+      History.History = HistoryModel.History;
       ContentViewModel = History;
+    }
     else ContentViewModel = Prompts;
   }
 

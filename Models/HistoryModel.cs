@@ -24,8 +24,6 @@ public class HistoryModel {
   public List<HistoryItem> _History = [];
   public List<HistoryItem> History {
     get {
-      if (!CheckConnection())
-        return [];
       return _History;
     }
   private

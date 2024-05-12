@@ -15,6 +15,14 @@
     <TextBox Classes="settings" Text="{Binding User}"/>
     <TextBlock Classes="settings" Text="{DynamicResource Settings.Database.Password}"/>
     <TextBox Classes="settings" Text="{Binding Password}"/>
+
+    <Button Content="{DynamicResource Settings.Database.Connect}"
+            Margin="20"
+            Padding="10"
+            Width="150"
+            HorizontalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Command="{Binding Reset}"/>
   </StackPanel>
 
 </UserControl>

@@ -16,6 +16,7 @@
   <v:String x:Key="Settings.Database.Server">Host</v:String>
   <v:String x:Key="Settings.Database.UserName">User</v:String>
   <v:String x:Key="Settings.Database.Password">Password</v:String>
+  <v:String x:Key="Settings.Database.Connect">Connect</v:String>
 
   <v:String x:Key="Auto">Auto</v:String>
   <v:String x:Key="Russian">Russian</v:String>
