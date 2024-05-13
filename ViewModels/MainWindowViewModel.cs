@@ -8,11 +8,13 @@ namespace translator.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase {
   public static ResourceInclude? translations;
-  public static IResourceDictionary LocaleDict {get; set;}
+  public static IResourceDictionary LocaleDict { get; set; }
 
-  #pragma warning disable CS8618
-  static MainWindowViewModel() { _Locale("en-US"); }
-  #pragma warning restore
+#pragma warning disable CS8618
+  static MainWindowViewModel() {
+    _Locale("en-US");
+  }
+#pragma warning restore
 
   private TranslatorModel Translator { get; set; }
   private HistoryModel HistoryModel { get; set; }
@@ -26,19 +28,20 @@ public class MainWindowViewModel : ViewModelBase {
   public ViewModelBase ContentViewModel {
     get => _ContentViewModel;
     set {
-      if (_ContentViewModel == value) return;
+      if (_ContentViewModel == value)
+        return;
       _ContentViewModel = value;
       RaisePropertyChanged();
     }
   }
 
   public MainWindowViewModel() {
-    Prompts = new(this);
-    Languages = new(this);
-    Settings = new(this);
-    Translator = new();
+    Prompts      = new(this);
+    Languages    = new(this);
+    Settings     = new(this); Settings.Setup();
+    Translator   = new();
     HistoryModel = new();
-    History = new(HistoryModel);
+    History      = new(HistoryModel);
 
     _ContentViewModel = Prompts;
   }
@@ -46,7 +49,10 @@ public class MainWindowViewModel : ViewModelBase {
   public void ToggleSettings() {
     if (ContentViewModel is not SettingsViewModel)
       ContentViewModel = Settings;
-    else ContentViewModel = Prompts;
+    else {
+      ContentViewModel = Prompts;
+      Settings.SaveSettings();
+    }
   }
 
   public void ToggleHistory() {
@@ -56,22 +62,22 @@ public class MainWindowViewModel : ViewModelBase {
       HistoryModel.ResetHistory(db.User, db.Server, db.Password);
 
       History.AllHistory = HistoryModel.History;
-      ContentViewModel = History;
-    }
-    else ContentViewModel = Prompts;
+      ContentViewModel   = History;
+    } else
+      ContentViewModel = Prompts;
   }
 
   public void ChangeTheme(string theme) {
-    var themes = App.Current?.Resources
-      .MergedDictionaries.OfType<ResourceInclude>()
-      .FirstOrDefault(x => x.Source?.OriginalString?.Contains("/Theme/") ?? false);
+    var themes = App.Current?.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(
+        x => x.Source?.OriginalString?.Contains("/Theme/") ?? false
+    );
 
     if (themes != null)
       App.Current!.Resources.MergedDictionaries.Remove(themes);
 
-    var newDictionary = new ResourceInclude(new Uri($"avares://translator/Assets/Theme/{theme}.axaml")) {
-        Source = new Uri($"avares://translator/Assets/Theme/{theme}.axaml")
-    };
+    var newDictionary =
+        new ResourceInclude(new Uri($"avares://translator/Assets/Theme/{theme}.axaml")
+        ) { Source = new Uri($"avares://translator/Assets/Theme/{theme}.axaml") };
     App.Current?.Resources.MergedDictionaries.Add(newDictionary);
   }
 
@@ -82,16 +88,17 @@ public class MainWindowViewModel : ViewModelBase {
   }
 
   static void _Locale(string locale) {
-    var translations = App.Current?.Resources
-      .MergedDictionaries.OfType<ResourceInclude>()
-      .FirstOrDefault(x => x.Source?.OriginalString?.Contains("/Lang/") ?? false);
+    var translations =
+        App.Current?.Resources.MergedDictionaries.OfType<ResourceInclude>().FirstOrDefault(
+            x => x.Source?.OriginalString?.Contains("/Lang/") ?? false
+        );
 
     if (translations != null)
       App.Current!.Resources.MergedDictionaries.Remove(translations);
 
-    var newDictionary = new ResourceInclude(new Uri($"avares://translator/Assets/Lang/{locale}.axaml")) {
-        Source = new Uri($"avares://translator/Assets/Lang/{locale}.axaml")
-    };
+    var newDictionary =
+        new ResourceInclude(new Uri($"avares://translator/Assets/Lang/{locale}.axaml")
+        ) { Source = new Uri($"avares://translator/Assets/Lang/{locale}.axaml") };
     App.Current?.Resources.MergedDictionaries.Add(newDictionary);
 
     LocaleDict = newDictionary.Loaded;
@@ -99,11 +106,11 @@ public class MainWindowViewModel : ViewModelBase {
 
   public void Translate(object obj) {
     Prompts.Right.Translation = Translator.Translate(
-      Prompts.Left,
-      Settings.General.Engine,
-      Languages.LeftSelected.Lang,
-      Languages.RightSelected.Lang,
-      Lang.Russian
+        Prompts.Left,
+        Settings.General.Engine,
+        Languages.LeftSelected.Lang,
+        Languages.RightSelected.Lang,
+        Lang.Russian
     );
   }
 }
