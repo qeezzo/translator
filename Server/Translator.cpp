@@ -5,19 +5,30 @@
 #include <qobject.h>
 
 #include <QString>
+#include <QTimer>
 #include <QThread>
 
 Translator::Translator(int argc, char *argv[]) : app(argc, argv) {
   QObject::connect(&translator, &QOnlineTranslator::finished,
                    [&] { on_translation_finished(); });
+  QObject::connect(&timer, &QTimer::timeout, [&] { on_timeout(); });
 }
 
 auto Translator::translate(const std::string text, Engine engine, Lang dest,
                            Lang src, Lang ui_lang) -> bool {
   m_error = "";
   translator.translate(text.c_str(), engine, dest, src, ui_lang);
+
+  timer.start(4000); // 4 seconds timeout
+
   app.exec();
   return m_error.empty();
+}
+
+auto Translator::on_timeout() -> void {
+  translator.abort(); // abort the translation request
+  m_error = "Translation timed out";
+  app.exit();
 }
 
 auto Translator::on_translation_finished() -> void {

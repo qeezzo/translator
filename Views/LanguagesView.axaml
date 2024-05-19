@@ -46,7 +46,7 @@
              Grid.Column="1" DockPanel.Dock="Left">
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
-          <StackPanel Orientation="Horizontal" />
+          <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
 
@@ -65,7 +65,7 @@
              Grid.Column="3" DockPanel.Dock="Right">
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
-          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" FlowDirection="RightToLeft"/>
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
 

@@ -56,7 +56,7 @@
 
       <SelectableTextBlock/>
       <SelectableTextBlock Foreground="#888" FontStyle="Italic" Text="{DynamicResource Prompt.Examples}"
-        IsVisible="{Binding Translation.examples.Count}}" />
+        IsVisible="{Binding Translation.examples.Count}" />
 
       <StackPanel>
         <ItemsControl ItemsSource="{Binding Translation.examples}">

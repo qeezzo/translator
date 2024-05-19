@@ -2,6 +2,7 @@
 #include <qonlinetranslator.h>
 
 #include <QString>
+#include <QTimer>
 #include <QThread>
 #include <QtCore/QCoreApplication>
 #include <boost/asio/query.hpp>
@@ -55,6 +56,7 @@ class Translator {
 
   QCoreApplication app;
   QOnlineTranslator translator;
+  QTimer timer;
 
   std::string m_error;
 
@@ -62,4 +64,5 @@ class Translator {
   mutable std::vector<std::pair<int, std::string>> engs;
 
   void on_translation_finished();
+  void on_timeout();
 };

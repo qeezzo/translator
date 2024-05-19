@@ -30,6 +30,9 @@ public class MainWindowViewModel : ViewModelBase {
     set {
       if (_ContentViewModel == value)
         return;
+      if (_ContentViewModel is SettingsViewModel)
+        Settings.SaveSettings();
+
       _ContentViewModel = value;
       RaisePropertyChanged();
     }
@@ -43,6 +46,9 @@ public class MainWindowViewModel : ViewModelBase {
     HistoryModel = new();
     History      = new(HistoryModel);
 
+    var db = Settings.Database;
+    HistoryModel.ResetHistory(db.User, db.Server, db.Password);
+
     _ContentViewModel = Prompts;
   }
 
@@ -51,7 +57,7 @@ public class MainWindowViewModel : ViewModelBase {
       ContentViewModel = Settings;
     else {
       ContentViewModel = Prompts;
-      Settings.SaveSettings();
+      // Settings.SaveSettings();
     }
   }
 
@@ -110,7 +116,7 @@ public class MainWindowViewModel : ViewModelBase {
         Settings.General.Engine,
         Languages.LeftSelected.Lang,
         Languages.RightSelected.Lang,
-        Lang.Russian
+        Settings.General.Language.Lang
     );
   }
 }

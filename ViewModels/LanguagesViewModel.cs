@@ -50,27 +50,20 @@ public partial class LanguagesViewModel : ViewModelBase {
       Main!.ContentViewModel = Main!.Prompts;
   }
 
-  private void ReadList(List<Language> list, string filename) {
-    System.Console.WriteLine("reading ... " + filename);
-    DataContractSerializer serializer = new DataContractSerializer(typeof(List<Language>));
+  private void ReadList(ObservableCollection<Language> list, string filename) {
+    DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<Language>));
     if (File.Exists(filename))
       using (FileStream fs = new FileStream(filename, FileMode.Open))
         if (fs.Length > 0) {
-          list = (List<Language>?)serializer.ReadObject(fs) ?? new();
-          defaults.ForEach(l => list.Add(l));
-          System.Console.WriteLine("read");
+          list = (ObservableCollection<Language>?)serializer.ReadObject(fs) ?? list;
           return;
         }
-    defaults.ForEach(l => list.Add(l));
-    System.Console.WriteLine("read");
   }
 
-  private void WriteList(List<Language> list, string filename) {
-    System.Console.WriteLine("writing ... " + filename);
-    DataContractSerializer serializer = new DataContractSerializer(typeof(List<Language>));
+  private void WriteList(ObservableCollection<Language> list, string filename) {
+    DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<Language>));
     using (FileStream fs = new FileStream(filename, FileMode.Create))
       serializer.WriteObject(fs, list);
-    System.Console.WriteLine("written");
   }
 }
 
